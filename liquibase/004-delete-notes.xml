@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="004-delete-notes.xml">
+
+    <changeSet id="004" author="Anton">
+        <sql>
+            ALTER TABLE public.students DROP CONSTRAINT students_fac_id_fkey
+        </sql>
+        <sql>
+            DELETE FROM public.students
+            USING public.faculties
+            WHERE students.fac_id = public.faculties.id_fac AND
+            public.faculties.name = 'ТЕФ'
+        </sql>
+        <sql>
+            DELETE FROM public.faculties
+            USING public.students
+            WHERE public.faculties.name = 'ТЕФ'
+        </sql>
+        <sql>
+            ALTER TABLE public.students
+            ADD CONSTRAINT FK_Fac_id
+            FOREIGN KEY (fac_id) REFERENCES faculties(id_fac)
+        </sql>
+    </changeSet>
+</databaseChangeLog>

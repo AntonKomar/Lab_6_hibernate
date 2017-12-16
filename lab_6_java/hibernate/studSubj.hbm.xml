@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="models.StudentSubject" table="students_subjects">
+        <meta attribute="class-description">
+            This class contains developer's details.
+        </meta>
+        <property name="stud_id" type="int" column="stud_id"/>
+        <id name="subj_id" type="int" column="subj_id"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="001-create-all-table.xml">
+
+    <changeSet id="001" author="Anton">
+        <sql>
+            CREATE TABLE faculties (
+            id_fac INT UNIQUE ,
+            name CHARACTER VARYING(50) NOT NULL,
+            PRIMARY KEY (id_fac)
+            )
+        </sql>
+        <sql>
+            CREATE TABLE students (
+            id_stud INT UNIQUE ,
+            name CHARACTER VARYING(50) NOT NULL,
+            surname CHARACTER VARYING(50) NOT NULL,
+            fac_id INT NOT NULL ,
+            PRIMARY KEY (id_stud),
+            FOREIGN KEY(fac_id) REFERENCES faculties(id_fac)
+            ON DELETE CASCADE
+            )
+        </sql>
+        <sql>
+            CREATE TABLE teachers (
+            id_teach INT UNIQUE ,
+            name CHARACTER VARYING(50) NOT NULL ,
+            surname CHARACTER VARYING(50) NOT NULL ,
+            PRIMARY KEY (id_teach)
+            )
+        </sql>
+        <sql>
+            CREATE TABLE subjects (
+            id_subj INT UNIQUE ,
+            name CHARACTER VARYING(50) NOT NULL ,
+            teacher_id INT NOT NULL ,
+            FOREIGN KEY(teacher_id) REFERENCES teachers(id_teach)
+            ON DELETE CASCADE ,
+            PRIMARY KEY (id_subj)
+            )
+        </sql>
+        <sql>
+            CREATE TABLE students_subjects(
+            stud_id INT NOT NULL ,
+            subj_id INT NOT NULL,
+            FOREIGN KEY (stud_id) REFERENCES students(id_stud)
+            ON DELETE CASCADE ,
+            FOREIGN KEY (subj_id) REFERENCES subjects(id_subj)
+            ON DELETE CASCADE
+            )
+        </sql>
+
+        <rollback>
+            <sql>
+                DROP SCHEMA public CASCADE
+            </sql>
+            <sql>
+                CREATE SCHEMA public
+            </sql>
+        </rollback>
+
+    </changeSet>
+</databaseChangeLog>
