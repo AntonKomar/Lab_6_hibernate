@@ -1,63 +1,63 @@
 package optionsHibernate;
 
-import models.Subject;
+import models.Teacher;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class MethodSubject {
+public class MethodTeacher {
     private static SessionFactory sessionFactory;
 
-    public MethodSubject(SessionFactory sessionFactory) {
+    public MethodTeacher(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    public void addSubject(int id, String Name, int teach_id) {
+    public void addTeacher(int id, String Name, String SName) {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
 
         transaction = session.beginTransaction();
-        Subject subject = new Subject(id, Name, teach_id);
-        session.save(subject);
+        Teacher teacher = new Teacher(id, Name, SName);
+        session.save(teacher);
         transaction.commit();
         session.close();
     }
 
-    public void updateFaculty(int id, String Name, int teach_id) {
+    public void updateTeacher(int id, String Name, String SName) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = null;
 
         transaction = session.beginTransaction();
-        Subject subject = (Subject) session.get(Subject.class, id);
-        subject.setName(Name);
-        subject.setTeachId(teach_id);
-        session.update(subject);
+        Teacher teacher = (Teacher) session.get(Teacher.class, id);
+        teacher.setTeachName(Name);
+        teacher.setSName(SName);
+        session.update(teacher);
         transaction.commit();
         session.close();
     }
 
-    public void removeFaculty(int id) {
+    public void removeTeacher(int id) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = null;
 
         transaction = session.beginTransaction();
-        Subject subject = (Subject) session.get(Subject.class, id);
-        session.delete(subject);
+        Teacher teacher = (Teacher) session.get(Teacher.class, id);
+        session.delete(teacher);
         transaction.commit();
         session.close();
     }
 
-    public List listFaculties() {
+    public List listTeachers() {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = null;
 
         transaction = session.beginTransaction();
-        List subjects = session.createQuery("FROM subjects").list();
+        List teachers = session.createQuery("FROM teachers").list();
 
         transaction.commit();
         session.close();
-        return subjects;
+        return teachers;
     }
 }

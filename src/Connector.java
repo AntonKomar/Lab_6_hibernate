@@ -12,27 +12,9 @@ public class Connector {
     public static Connection connection;
 
     public static void connector() {
-        String url;
-        String userName;
-        String password;
-
-        String s = "";
-        Scanner in = null;
-
-        try {
-            in = new Scanner(new File("lab_db/src/signIn.txt"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        while(in.hasNext()) {
-            s += in.nextLine();
-        }
-        in.close();
-
-        String[] data = s.split(" ");
-        url = data[0];
-        userName = data[1];
-        password = data[2];
+        String url="jdbc:postgresql://217.23.154.1:5432/labdb";
+        String userName="dbroot";
+        String password="pinkhorsegohome97";
 
            try {
                Class.forName("org.postgresql.Driver");
