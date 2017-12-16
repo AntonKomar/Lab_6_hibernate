@@ -7,7 +7,7 @@
         <meta attribute="class-description">
             This class contains developer's details.
         </meta>
-        <property name="stud_id" type="int" column="stud_id"/>
-        <id name="subj_id" type="int" column="subj_id"/>
+        <id name="StudId" type="int" column="stud_id"/>
+        <property name="SubId" type="int" column="subj_id"/>
     </class>
 </hibernate-mapping>

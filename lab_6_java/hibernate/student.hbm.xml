@@ -10,6 +10,6 @@
         <id name="id" type="int" column="id_stud"/>
         <property name="name" column="name" type="string"/>
         <property name="SName" column="surname" type="string"/>
-        <id name="faculId" type="int" column="fac_id"/>
+        <property name="facid" type="int" column="fac_id"/>
     </class>
 </hibernate-mapping>
