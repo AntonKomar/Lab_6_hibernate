@@ -1,7 +1,9 @@
+
+
 import liquibase.exception.LiquibaseException;
 import models.Connector;
 import models.Main;
-import optionsHibernate.*;
+import optionshibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -9,7 +11,7 @@ import org.testng.annotations.AfterClass;
 
 import java.sql.SQLException;
 
-public class junitTests {
+public class JunitTests {
 
     @BeforeClass
     public static void onlyOnce() throws SQLException, ClassNotFoundException, LiquibaseException {

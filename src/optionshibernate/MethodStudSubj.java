@@ -1,63 +1,62 @@
-package optionsHibernate;
+package optionshibernate;
 
-import models.Subject;
+import models.StudentSubject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class MethodSubject {
+public class MethodStudSubj {
     private static SessionFactory sessionFactory;
 
-    public MethodSubject(SessionFactory sessionFactory) {
+    public MethodStudSubj(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    public void addSubject(int id, String Name, int teach_id) {
+    public void addStudSubj(int idSt, int idSu) {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
 
         transaction = session.beginTransaction();
-        Subject subject = new Subject(id, Name, teach_id);
-        session.save(subject);
+        StudentSubject studSubj = new StudentSubject(idSt, idSu);
+        session.save(studSubj);
         transaction.commit();
         session.close();
     }
 
-    public void updateSubject(int id, String Name, int teach_id) {
+    public void updateStudSubj(int idSt, int idSu) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = null;
 
         transaction = session.beginTransaction();
-        Subject subject = (Subject) session.get(Subject.class, id);
-        subject.setName(Name);
-        subject.setTeachId(teach_id);
-        session.update(subject);
+        StudentSubject studSubj = (StudentSubject) session.get(StudentSubject.class, idSt);
+        studSubj.setStudId(idSu);
+        session.update(studSubj);
         transaction.commit();
         session.close();
     }
 
-    public void removeSubject(int id) {
+    public void removeStudSubj(int id) {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = null;
 
         transaction = session.beginTransaction();
-        Subject subject = (Subject) session.get(Subject.class, id);
-        session.delete(subject);
+        StudentSubject studSubj = (StudentSubject) session.get(StudentSubject.class, id);
+        session.delete(studSubj);
         transaction.commit();
         session.close();
     }
 
-    public List listSubject() {
+    public List listStudSubjs() {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = null;
 
         transaction = session.beginTransaction();
-        List subjects = session.createQuery("FROM subjects").list();
+        List studSubjs = session.createQuery("FROM students_subjects").list();
 
         transaction.commit();
         session.close();
-        return subjects;
+        return studSubjs;
     }
 }

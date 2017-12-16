@@ -1,4 +1,4 @@
-package optionsHibernate;
+package optionshibernate;
 
 import models.Faculty;
 import org.hibernate.Session;
